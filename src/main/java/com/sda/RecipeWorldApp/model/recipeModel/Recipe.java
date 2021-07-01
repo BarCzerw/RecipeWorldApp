@@ -1,5 +1,6 @@
 package com.sda.RecipeWorldApp.model.recipeModel;
 
+import com.sda.RecipeWorldApp.model.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,8 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     private Set<IngredientMeasure> ingredientList;
     private int portions;
+
+    @ManyToOne
+    private Account owner;
 
 }

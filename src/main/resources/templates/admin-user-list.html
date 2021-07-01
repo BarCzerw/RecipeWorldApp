@@ -6,11 +6,14 @@
 </head>
 <body>
 <h2>Admin Account List Page</h2>
-<div style="flex flex-direction: column">
-    <div th:each="user : ${users}" style="flex flex-direction: row">
+<div style="display: flex; flex-direction: column;">
+    <div th:each="user : ${users}" style="display: flex; flex-direction: row;">
         <div th:text="${user.getId()}"></div>
+        <div> - </div>
         <div th:text="${user.getUsername()}"></div>
+        <div> - </div>
         <div th:text="${user.getPassword()}"></div>
+        <div> - </div>
         <div th:text="${user.getAuthorities()}"></div>
     </div>
 </div>

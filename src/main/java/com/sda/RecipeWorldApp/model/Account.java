@@ -1,5 +1,6 @@
 package com.sda.RecipeWorldApp.model;
 
+import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,9 @@ public class Account implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AccountRole> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Recipe> recipes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

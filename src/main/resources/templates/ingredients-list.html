@@ -5,10 +5,11 @@
     <title>Ingredients</title>
 </head>
 <body>
-<div style="flex flex-direction: column">
-    <div th:each="ing : ${ingredients}" >
+<div style="display: flex; flex-direction: column;">
+    <div th:each="ing : ${ingredients}" style="display: flex; flex-direction: row;">
         <div th:text="${ing.getName()}"></div>
-        <div th:text="${ing.getName()}"></div>
+        <div> - </div>
+        <div th:text="${ing.getType()}"></div>
     </div>
 </div>
 </body>
