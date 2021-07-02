@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipes</title>
+</head>
+<body>
+<div style="display: flex; flex-direction: column;">
+  <a th:each="recipe : ${recipes}" th:href="@{'/recipe/' + ${recipe.getId()}}"
+     th:text="${recipe.getName()}"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${recipe.getName()}"></title>
+</head>
+<body>
+<div style="display: flex; flex-direction: column;">
+    <div style="display: flex; flex-direction: row;" th:each="ingSet : ${recipe.getIngredientList()}" th:object="${ingSet}">
+        <div th:text="${ingSet.getIngredient().getName()}"></div>
+        <div> - </div>
+        <div th:text="*{ammount}"></div>
+        <div> </div>
+        <div th:text="*{units}"></div>
+    </div>
+    <div>
+        <form method="post" th:action="@{/measure/add}">
+            <input type="number" hidden th:field="*{id}">
+            <input type="number" hidden th:value="${recipe.getId()}" name="recipeId">
+            <div style="display:flex; flex-direction: column;">
+                <label>Ingredient<input type="text" th:name="ingredientId"></label>
+                <label>Name<input type="number" th:name="ammount"></label>
+                <label>Name<input type="text" th:name="units"></label>
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -26,4 +26,9 @@ public class IngredientService {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findById(ingredientId);
         ingredientOptional.ifPresent(ingredientRepository::delete);
     }
+
+    public Optional<Ingredient> getIngredientById(long ingredientId) {
+        return ingredientRepository.findById(ingredientId);
+    }
+
 }

@@ -20,9 +20,12 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public void addRecipe(Recipe recipe, Account owner) {
-        recipe.setOwner(owner);
-        recipeRepository.save(recipe);
+    public void addRecipe(Recipe recipe, Long ownerId) {
+        Optional<Account> accountOptional = accountRepository.findById(ownerId);
+        if (accountOptional.isPresent()) {
+            recipe.setOwner(accountOptional.get());
+            recipeRepository.save(recipe);
+        }
     }
 
     public void deleteRecipe(long recipeId) {

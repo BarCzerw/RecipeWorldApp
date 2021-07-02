@@ -5,7 +5,7 @@ import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
 import com.sda.RecipeWorldApp.service.AccountService;
 import com.sda.RecipeWorldApp.service.RecipeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -29,31 +28,27 @@ public class RecipeController {
         return "recipe-list";
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public String getRecipe(Model model, @PathVariable(name = "id") long recipeId) {
         Optional<Recipe> recipeOptional = recipeService.getRecipeById(recipeId);
         if (recipeOptional.isPresent()) {
             model.addAttribute("recipe", recipeOptional.get());
-            return "recipe-detail";
+            return "recipe-details";
         }
         return "redirect:/recipe";
     }
 
     @GetMapping("/add")
-    public String addRecipeForm(Model model) {
-        model.addAttribute("newRecipe", new Recipe());
-        return "recipe-add-form";
+    public String addRecipeForm(Model model, Authentication authentication) {
+            Account account = (Account) authentication.getPrincipal();
+            model.addAttribute("accountId", account.getId());
+            model.addAttribute("newRecipe", new Recipe());
+            return "recipe-add-form";
     }
 
     @PostMapping("/add")
-    public String addRecipe(Recipe recipe, Principal principal) {
-        if (principal instanceof UsernamePasswordAuthenticationToken) {
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
-            if (usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
-                Account account = (Account) usernamePasswordAuthenticationToken.getPrincipal();
-                recipeService.addRecipe(recipe, account);
-            }
-        }
+    public String addRecipe(Recipe recipe, Long ownerId) {
+        recipeService.addRecipe(recipe, ownerId);
         return "redirect:/recipe";
     }
 

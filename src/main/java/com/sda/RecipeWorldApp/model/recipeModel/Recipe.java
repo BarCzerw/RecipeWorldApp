@@ -21,6 +21,7 @@ public class Recipe {
     private long id;
 
     private String name;
+    private String description;
     @OneToMany(mappedBy = "recipe")
     private Set<IngredientMeasure> ingredientList;
     private int portions;
