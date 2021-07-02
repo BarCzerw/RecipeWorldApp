@@ -1,7 +1,8 @@
 package com.sda.RecipeWorldApp.service;
 
-import com.sda.RecipeWorldApp.model.recipeModel.Ingredient;
+import com.sda.RecipeWorldApp.model.Account;
 import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
+import com.sda.RecipeWorldApp.repository.AccountRepository;
 import com.sda.RecipeWorldApp.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class RecipeService {
-    RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
+    private final AccountRepository accountRepository;
+
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
 
-    public void addRecipe(Recipe recipe) {
+    public void addRecipe(Recipe recipe, Account owner) {
+        recipe.setOwner(owner);
         recipeRepository.save(recipe);
     }
 
@@ -25,4 +29,9 @@ public class RecipeService {
         Optional<Recipe> ingredientOptional = recipeRepository.findById(recipeId);
         ingredientOptional.ifPresent(recipeRepository::delete);
     }
+
+    public Optional<Recipe> getRecipeById(long recipeId) {
+        return recipeRepository.findById(recipeId);
+    }
+
 }

@@ -1,15 +1,14 @@
 package com.sda.RecipeWorldApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -34,6 +33,8 @@ public class Account implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AccountRole> roles;
 
+    @ToString.Exclude
+    @JsonBackReference
     @OneToMany(mappedBy = "owner")
     private Set<Recipe> recipes;
 
@@ -42,4 +43,16 @@ public class Account implements UserDetails {
         return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(id, account.id) && Objects.equals(username, account.username) && Objects.equals(password, account.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password);
+    }
 }

@@ -6,13 +6,12 @@
 </head>
 <body>
 <div>
-  <form th:action="@{/ingredient/add}" method="post" th:object="${newIngredient}">
+  <form th:action="@{/recipe/add}" method="post" th:object="${newRecipe}">
     <input type="number" hidden th:field="*{id}">
-    <div style="flex flex-direction: column">
+    <input type="number" hidden th:field="${account.getId()}" name="ownerId">
+    <div style="display:flex; flex-direction: column;">
       <label>Name<input type="text" th:field="*{name}"></label>
-      <select th:field="*{type}">
-        <option th:each="type : ${typeList}" th:text="${type}" th:value="${type}"></option>
-      </select>
+      <label>Name<input type="number" th:field="*{portions}"></label>
       <button type="submit">Add</button>
     </div>
   </form>
