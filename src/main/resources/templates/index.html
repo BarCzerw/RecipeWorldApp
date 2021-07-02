@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Recipe World!</title>
+    <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
+<th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
 <h2>Welcome to Recipe World!</h2>
 </body>
 </html>
