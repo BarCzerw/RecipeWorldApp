@@ -2,20 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User list</title>
+    <title>Admin panel</title>
+    <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
-<h2>Admin Account List Page</h2>
-<div style="display: flex; flex-direction: column;">
-    <div th:each="user : ${users}" style="display: flex; flex-direction: row;">
-        <div th:text="${user.getId()}"></div>
-        <div> - </div>
-        <div th:text="${user.getUsername()}"></div>
-        <div> - </div>
-        <div th:text="${user.getPassword()}"></div>
-        <div> - </div>
-        <div th:text="${user.getAuthorities()}"></div>
-    </div>
-</div>
+<header>
+    <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<main class="mainContainer">
+    <table class="listTable">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Expired</th>
+            <th>Locked</th>
+            <th>Credentials Expired</th>
+            <th>Enabled</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${!user.isAccountNonExpired()}"></td>
+            <td th:text="${!user.isAccountNonLocked()}"></td>
+            <td th:text="${!user.isCredentialsNonExpired()}"></td>
+            <td th:text="${user.isEnabled()}"></td>
+            <td><button type="button"><a th:href="@{'/admin/users/delete/'+${user.getId()}}">Delete</a> </button></td>
+        </tr>
+    </table>
+</main>
 </body>
 </html>

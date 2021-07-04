@@ -54,12 +54,26 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(Recipe recipe, Long ownerId) {
         recipeService.addRecipe(recipe, ownerId);
-        return "redirect:/recipe";
+        return "redirect:/myaccount/recipes";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editRecipe(Model model, Authentication authentication, @PathVariable long id) {
+        Account account = (Account) authentication.getPrincipal();
+        Optional<Recipe> recipeOptional = recipeService.getRecipeById(id);
+        if (recipeOptional.isPresent()) {
+            Recipe recipe = recipeOptional.get();
+            if (recipe.getOwner().getId().equals(account.getId())) {
+                model.addAttribute("recipe", recipeOptional.get());
+                return "recipe-edit-form";
+            }
+        }
+        return "redirect:/myaccount/recipes";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable(name = "id") long recipeId) {
         recipeService.deleteRecipe(recipeId);
-        return "redirect:/recipe";
+        return "redirect:/myaccount/recipes";
     }
 }

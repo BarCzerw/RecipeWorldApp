@@ -23,6 +23,42 @@
     width: 1300px;
 }
 
+.rowContainer {
+    display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1300px;
+}
+
+.clickable {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 25px;
+    background-color: #7ecbde;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.big {
+    width: 250px;
+    height: 100px;
+    text-size: 52px;
+}
+
+.wide {
+    width: 600px;
+    height: 50px;
+    text-size: 30px;
+}
+
 .smallBlockContainer {
     display: flex;
     flex-direction: column;
@@ -56,4 +92,10 @@
 .listTable tr:hover {
     background-color: AliceBlue;
     transition: all 0.8s;
+}
+
+.sendForm {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
 }

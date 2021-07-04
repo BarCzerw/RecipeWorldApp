@@ -2,10 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Ingredient adding form</title>
+  <title>Ingredients</title>
+  <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
-<div>
+<header>
+  <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<div class="mainContainer">
   <form th:action="@{/recipe/add}" method="post" th:object="${newRecipe}">
     <input type="number" hidden th:field="*{id}">
     <input type="number" hidden th:value="${accountId}" name="ownerId">

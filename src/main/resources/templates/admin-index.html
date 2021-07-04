@@ -9,27 +9,10 @@
 <header>
     <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
 </header>
-<main class="mainContainer">
-    <table class="listTable">
-        <tr>
-            <th>User ID</th>
-            <th>Username</th>
-            <th>Expired</th>
-            <th>Locked</th>
-            <th>Credentials Expired</th>
-            <th>Enabled</th>
-            <th>Delete</th>
-        </tr>
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getUsername()}"></td>
-            <td th:text="${!user.isAccountNonExpired()}"></td>
-            <td th:text="${!user.isAccountNonLocked()}"></td>
-            <td th:text="${!user.isCredentialsNonExpired()}"></td>
-            <td th:text="${user.isEnabled()}"></td>
-            <td><button type="button"><a th:href="@{'/admin/users/delete/'+${user.getId()}}">-</a> </button></td>
-        </tr>
-    </table>
+<main class="rowContainer">
+    <a class="clickable big" th:href="@{/admin/users}">List of users</a>
+    <a class="clickable big" th:href="@{/ingredient}">List of ingredients</a>
+    <a class="clickable big" th:href="@{/recipemanager/}">List of recipes</a>
 </main>
 </body>
 </html>

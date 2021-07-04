@@ -20,13 +20,11 @@
     <tr th:each="recipe, index : ${myRecipes}">
       <td th:text="${index.index+1}"></td>
       <td th:text="${recipe.getName()}"></td>
-      <td><a th:href="@{/recipe/edit}">Edit</a></td>
+      <td><a th:href="@{'/recipe/edit/'+${recipe.getId()}}">Edit</a></td>
       <td><a th:href="@{'/recipe/delete/'+${recipe.getId()}}">Delete</a></td>
     </tr>
   </table>
-  <div class="smallBlockContainer">
-    <a th:href="@{/recipe/add}">Add new recipe</a>
-  </div>
+    <a class="clickable wide" th:href="@{/recipe/add}">Add new recipe</a>
 </main>
 </body>
 </html>

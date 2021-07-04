@@ -2,11 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Recipes</title>
+  <title>Ingredients</title>
+  <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
-<div style="display: flex; flex-direction: column;">
-  <a th:each="recipe : ${recipes}" th:href="@{'/recipe/' + ${recipe.getId()}}"
+<header>
+  <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<div class="rowContainer">
+  <a class="clickable big" th:each="recipe : ${recipes}" th:href="@{'/recipe/' + ${recipe.getId()}}"
      th:text="${recipe.getName()}"></a>
 </div>
 </body>
