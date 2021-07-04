@@ -1,5 +1,6 @@
 package com.sda.RecipeWorldApp.controller;
 
+import com.sda.RecipeWorldApp.model.recipeModel.Ingredient;
 import com.sda.RecipeWorldApp.model.recipeModel.IngredientMeasure;
 import com.sda.RecipeWorldApp.service.IngredientMeasureService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,8 @@ public class IngredientMeasureController {
     private final IngredientMeasureService ingredientMeasureService;
 
     @PostMapping("/add")
-    public String addMeasure(IngredientMeasure measure, long recipeId, long ingredientId) {
-        ingredientMeasureService.addMeasure(measure, recipeId,ingredientId);
+    public String addMeasure(IngredientMeasure measure, long recipeId, Ingredient ingredient) {
+        ingredientMeasureService.addMeasure(measure, recipeId, ingredient.getId());
         return "redirect:/recipe/" + recipeId;
     }
 

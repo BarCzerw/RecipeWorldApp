@@ -1,7 +1,6 @@
 package com.sda.RecipeWorldApp.service;
 
 import com.sda.RecipeWorldApp.model.Account;
-import com.sda.RecipeWorldApp.model.AccountRole;
 import com.sda.RecipeWorldApp.model.RegisterRequest;
 import com.sda.RecipeWorldApp.repository.AccountRepository;
 import com.sda.RecipeWorldApp.repository.AccountRoleRepository;

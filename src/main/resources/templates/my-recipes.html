@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My recipes</title>
+  <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<header>
+  <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<main class="mainContainer">
+  <table class="listTable">
+    <tr>
+      <th>No.</th>
+      <th>Name</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+    <tr th:each="recipe, index : ${myRecipes}">
+      <td th:text="${index.index+1}"></td>
+      <td th:text="${recipe.getName()}"></td>
+      <td><a th:href="@{/recipe/edit}">Edit</a></td>
+      <td><a th:href="@{'/recipe/delete/'+${recipe.getId()}}">Delete</a></td>
+    </tr>
+  </table>
+  <div class="smallBlockContainer">
+    <a th:href="@{/recipe/add}">Add new recipe</a>
+  </div>
+</main>
+</body>
+</html>

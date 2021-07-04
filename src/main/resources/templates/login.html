@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
+    <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
-<body>
-    <form th:action="@{/login}" method="post">
+<body class="smallBlockContainer">
+<form th:action="@{/login}" method="post">
+    <div>
         <label>
             Login: <input type="text" id="username" name="username">
         </label>
+    </div>
+    <div>
         <label>
             Password: <input type="text" id="password" name="password">
         </label>
+    </div>
+    <div>
         <button type="submit">Login</button>
-    </form>
+    </div>
+</form>
 </body>
 </html>

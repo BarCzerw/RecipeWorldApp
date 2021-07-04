@@ -9,6 +9,7 @@
   <form th:action="@{/recipe/add}" method="post" th:object="${newRecipe}">
     <input type="number" hidden th:field="*{id}">
     <input type="number" hidden th:value="${accountId}" name="ownerId">
+    <input type="text" hidden value="" name="description">
     <div style="display:flex; flex-direction: column;">
       <label>Name<input type="text" th:field="*{name}"></label>
       <label>Name<input type="number" th:field="*{portions}"></label>

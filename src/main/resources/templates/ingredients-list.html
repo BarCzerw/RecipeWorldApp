@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Ingredients</title>
+    <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
-<div style="display: flex; flex-direction: column;">
-    <div th:each="ing : ${ingredients}" style="display: flex; flex-direction: row;">
-        <div th:text="${ing.getName()}"></div>
-        <div> - </div>
-        <div th:text="${ing.getType()}"></div>
+<header>
+    <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<main class="mainContainer">
+    <table class="listTable">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Remove</th>
+        </tr>
+        <tr th:each="ing, index : ${ingredients}">
+            <td th:text="${index.index+1}"></td>
+            <td th:text="${ing.getName()}"></td>
+            <td th:text="${ing.getType()}"></td>
+            <td><button type="button"><a th:href="@{'/ingredient/delete/'+${ing.getId()}}">-</a> </button></td>
+        </tr>
+    </table>
+    <div class="smallBlockContainer">
+        <a th:href="@{/ingredient/add}">Add ingredient</a>
     </div>
-</div>
+</main>
 </body>
 </html>

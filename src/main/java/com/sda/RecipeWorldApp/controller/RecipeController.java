@@ -1,8 +1,10 @@
 package com.sda.RecipeWorldApp.controller;
 
 import com.sda.RecipeWorldApp.model.Account;
+import com.sda.RecipeWorldApp.model.recipeModel.MeasureUnit;
 import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
 import com.sda.RecipeWorldApp.service.AccountService;
+import com.sda.RecipeWorldApp.service.IngredientService;
 import com.sda.RecipeWorldApp.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class RecipeController {
     private final RecipeService recipeService;
     private final AccountService accountService;
+    private final IngredientService ingredientService;
 
     @GetMapping
     public String getAllRecipes(Model model) {
@@ -33,6 +36,8 @@ public class RecipeController {
         Optional<Recipe> recipeOptional = recipeService.getRecipeById(recipeId);
         if (recipeOptional.isPresent()) {
             model.addAttribute("recipe", recipeOptional.get());
+            model.addAttribute("ingredientList", ingredientService.getAllIngredients());
+            model.addAttribute("unitList", MeasureUnit.values());
             return "recipe-details";
         }
         return "redirect:/recipe";

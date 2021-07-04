@@ -29,6 +29,8 @@ public class IngredientMeasure {
     private Ingredient ingredient;
 
     private double ammount;
-    private String units;
+
+    @Enumerated(EnumType.ORDINAL)
+    private MeasureUnit units;
 
 }

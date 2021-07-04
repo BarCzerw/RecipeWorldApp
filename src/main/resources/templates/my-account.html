@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My account</title>
+  <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<header>
+  <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<main class="mainContainer">
+  <ul>
+    <li>
+      <a th:href="@{/myaccount/recipes}">My recipes</a>
+    </li>
+    <li>
+      <a th:href="@{/ingredient/request}">Request ingredient #TODO</a>
+    </li>
+    <li>
+      <a th:href="@{/myaccount/settings}">Settings</a>
+    </li>
+  </ul>
+</main>
+</body>
+</html>

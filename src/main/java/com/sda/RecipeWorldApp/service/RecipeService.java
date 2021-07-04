@@ -37,4 +37,7 @@ public class RecipeService {
         return recipeRepository.findById(recipeId);
     }
 
+    public List<Recipe> getRecipesByOwner(Account owner) {
+        return recipeRepository.findAllByOwner(owner);
+    }
 }

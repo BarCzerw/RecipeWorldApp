@@ -16,6 +16,7 @@ public class IngredientMeasureService {
     private final IngredientMeasureRepository ingredientMeasureRepository;
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
+
     public void addMeasure(IngredientMeasure measure, long recipeId, long ingredientId) {
         Optional<Recipe> recipeOptional = recipeService.getRecipeById(recipeId);
         Optional<Ingredient> ingredientOptional = ingredientService.getIngredientById(ingredientId);

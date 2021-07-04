@@ -16,13 +16,13 @@
             <a href="/recipe">Recipes</a>
         </div>
         <div class="navItem">
-            <a href="/ingredient">Ingredients</a>
+            <a sec:authorize="hasRole('ADMIN')" href="/ingredient">Ingredients</a>
         </div>
         <div class="navItem">
             <a sec:authorize="hasRole('ADMIN')" href="/admin">Admin panel</a>
         </div>
         <div class="navItem navItemLast">
-            <a sec:authorize="isAuthenticated()" href="/account">My account</a>
+            <a sec:authorize="isAuthenticated()" href="/myaccount">My account</a>
         </div>
         <div class="navItem">
             <a sec:authorize="!isAuthenticated()" href="/login">Login</a>

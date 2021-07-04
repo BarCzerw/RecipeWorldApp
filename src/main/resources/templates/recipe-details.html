@@ -18,9 +18,13 @@
             <input type="number" hidden th:field="*{id}">
             <input type="number" hidden th:value="${recipe.getId()}" name="recipeId">
             <div style="display:flex; flex-direction: column;">
-                <label>Ingredient<input type="text" th:name="ingredientId"></label>
+                <select th:field="*{ingredientId}">
+                    <option th:each="ing : ${ingredientList}" th:text="${ing}" th:value="${ing}"></option>
+                </select>
                 <label>Name<input type="number" th:name="ammount"></label>
-                <label>Name<input type="text" th:name="units"></label>
+                <select th:field="*{unit}">
+                    <option th:each="unitType : ${unitList}" th:text="${unitType}" th:value="${unitType}"></option>
+                </select>
                 <button type="submit">Add</button>
             </div>
         </form>
