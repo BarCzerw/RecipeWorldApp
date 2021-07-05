@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${recipe.getName()}"></title>
+    <th:block th:replace="nav-panel :: link-styles" th:remove="tag"/>
 </head>
 <body>
-<div style="display: flex; flex-direction: column;">
-    <div style="display: flex; flex-direction: row;" th:each="ingSet : ${recipe.getIngredientList()}" th:object="${ingSet}">
-        <div th:text="${ingSet.getIngredient().getName()}"></div>
-        <div> - </div>
-        <div th:text="*{ammount}"></div>
-        <div> </div>
-        <div th:text="*{units}"></div>
+<header>
+    <th:block th:replace="nav-panel :: navigator" th:remove="tag"/>
+</header>
+<main class="mainContainer">
+    <div class="bigName" th:text="${recipe.getName()}"></div>
+    <table class="borderlessTable">
+        <tr>
+            <th>Ingredient</th>
+            <th>Ammount</th>
+            <th>Unit</th>
+        </tr>
+        <tr th:each="ingMeasure : ${recipe.getIngredientList()}">
+            <td th:text="${ingMeasure.getIngredient().getName()}"></td>
+            <td th:text="${ingMeasure.getAmmount()}"></td>
+            <td th:text="${ingMeasure.getUnits()}"></td>
+        </tr>
+    </table>
+    <div class="smallBlockContainer">
+        <p th:text="${recipe.getDescription()}"></p>
     </div>
-    <div>
-        <form method="post" th:action="@{/measure/add}">
-            <input type="number" hidden th:field="*{id}">
-            <input type="number" hidden th:value="${recipe.getId()}" name="recipeId">
-            <div style="display:flex; flex-direction: column;">
-                <select th:field="*{ingredientId}">
-                    <option th:each="ing : ${ingredientList}" th:text="${ing}" th:value="${ing}"></option>
-                </select>
-                <label>Name<input type="number" th:name="ammount"></label>
-                <select th:field="*{unit}">
-                    <option th:each="unitType : ${unitList}" th:text="${unitType}" th:value="${unitType}"></option>
-                </select>
-                <button type="submit">Add</button>
-            </div>
-        </form>
-    </div>
-</div>
+</main>
 </body>
 </html>

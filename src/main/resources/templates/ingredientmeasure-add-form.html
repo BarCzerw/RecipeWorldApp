@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${recipe.getName()}"></title>
+</head>
+<body>
+<div style="display: flex; flex-direction: column;">
+  <div style="display: flex; flex-direction: row;" th:each="ingSet : ${recipe.getIngredientList()}"
+       th:object="${ingSet}">
+    <div th:text="${ingSet.getIngredient().getName()}"></div>
+    <div> -</div>
+    <div th:text="*{ammount}"></div>
+    <div></div>
+    <div th:text="*{units}"></div>
+  </div>
+  <div>
+    <form method="post" th:action="@{/measure/add}" th:object="${newMeasure}">
+      <input type="number" hidden th:field="*{id}">
+      <input type="number" hidden th:value="${recipe.getId()}" name="recipeId">
+      <div style="display:flex; flex-direction: column;">
+        <label>
+          Ingredient
+          <select name="ingredientId">
+            <option th:each="ing : ${ingredientList}" th:text="${ing.getName()}" th:value="${ing.getId()}"></option>
+          </select>
+        </label>
+        <label>Ammount<input type="number" th:name="ammount"></label>
+        <label>
+          Unit
+          <select th:field="*{units}">
+            <option th:each="unitType : ${unitList}" th:text="${unitType}" th:value="${unitType}"></option>
+          </select>
+        </label>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

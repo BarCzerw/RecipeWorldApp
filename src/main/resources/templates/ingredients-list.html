@@ -21,7 +21,7 @@
             <td th:text="${index.index+1}"></td>
             <td th:text="${ing.getName()}"></td>
             <td th:text="${ing.getType()}"></td>
-            <td><button type="button"><a th:href="@{'/ingredient/delete/'+${ing.getId()}}">-</a> </button></td>
+            <td><button type="button"><a th:href="@{'/ingredient/delete/'+${ing.getId()}}">Remove</a></button></td>
         </tr>
     </table>
     <div>

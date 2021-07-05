@@ -1,6 +1,7 @@
 package com.sda.RecipeWorldApp.controller;
 
 import com.sda.RecipeWorldApp.model.Account;
+import com.sda.RecipeWorldApp.model.recipeModel.IngredientMeasure;
 import com.sda.RecipeWorldApp.model.recipeModel.MeasureUnit;
 import com.sda.RecipeWorldApp.model.recipeModel.Recipe;
 import com.sda.RecipeWorldApp.service.AccountService;
@@ -37,7 +38,6 @@ public class RecipeController {
         if (recipeOptional.isPresent()) {
             model.addAttribute("recipe", recipeOptional.get());
             model.addAttribute("ingredientList", ingredientService.getAllIngredients());
-            model.addAttribute("unitList", MeasureUnit.values());
             return "recipe-details";
         }
         return "redirect:/recipe";
@@ -64,8 +64,9 @@ public class RecipeController {
         if (recipeOptional.isPresent()) {
             Recipe recipe = recipeOptional.get();
             if (recipe.getOwner().getId().equals(account.getId())) {
-                model.addAttribute("recipe", recipeOptional.get());
-                return "recipe-edit-form";
+                model.addAttribute("newRecipe", recipeOptional.get());
+                model.addAttribute("accountId", account.getId());
+                return "recipe-add-form";
             }
         }
         return "redirect:/myaccount/recipes";

@@ -30,7 +30,7 @@ public class IngredientMeasure {
 
     private double ammount;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private MeasureUnit units;
 
 }

@@ -14,12 +14,14 @@
     <tr>
       <th>No.</th>
       <th>Name</th>
+      <th>Ingredient</th>
       <th>Edit</th>
       <th>Remove</th>
     </tr>
     <tr th:each="recipe, index : ${myRecipes}">
       <td th:text="${index.index+1}"></td>
       <td th:text="${recipe.getName()}"></td>
+      <td><a th:href="@{'/measure/add/'+${recipe.getId()}}">Add</a></td>
       <td><a th:href="@{'/recipe/edit/'+${recipe.getId()}}">Edit</a></td>
       <td><a th:href="@{'/recipe/delete/'+${recipe.getId()}}">Delete</a></td>
     </tr>
